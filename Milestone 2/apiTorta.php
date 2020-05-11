@@ -7,15 +7,11 @@
 
    $dataNuovo = $graphs["fatturato_by_agent"];
 
-   //mi ricavo i nomi di tutti gli agenti
+   //mi ricavo i nomi di tutti gli agenti e tutte le vendite
    $agenti = [];
+   $venditeTotali = [];
    foreach ($dataNuovo["data"] as $agente => $vendite) {
      $agenti[] = $agente;
-   }
-
-   // mi ricavo tutte le vendite
-   $venditeTotali = [];
-   foreach ($dataNuovo["data"] as $vendite) {
      $venditeTotali[] = $vendite;
    }
 
