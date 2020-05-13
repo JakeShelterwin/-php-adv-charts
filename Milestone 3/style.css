@@ -23,3 +23,7 @@ body {
   width: 80%;
   height : 80%;
 }
+
+.grafico1, .grafico2, .grafico3{
+  margin: 50px;
+}

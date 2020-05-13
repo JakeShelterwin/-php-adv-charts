@@ -11,12 +11,15 @@
 
         <div class="container">
             <div class="grafici">
-              <canvas id="line"></canvas>
-              <br><br>
-              <canvas id="pie"></canvas>
-              <br><br>
-              <canvas id="employee"></canvas>
-              <br><br>
+              <div class="grafico1">
+                <canvas id="guest"></canvas>
+              </div>
+              <div class="grafico2">
+                <canvas id="employee"></canvas>
+              </div>
+              <div class="grafico3">
+                <canvas id="clevel"></canvas>
+              </div>
             </div>
         </div>
 

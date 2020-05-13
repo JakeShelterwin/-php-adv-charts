@@ -6,7 +6,6 @@
    require_once 'db.php';
 
    //GRAFICO 1
-   $graphs["fatturato"]["accesso"] = 1;
    $oggettoGrafico1 = $graphs["fatturato"];
 
    //GRAFICO 2
@@ -25,8 +24,7 @@
      'tipoGrafico' => $grafico2["type"],
      'agenti' => $agenti,
      'venditeTotali' => $venditeTotali,
-     'access' => $grafico2["access"],
-     "accesso" => 10
+     'access' => $grafico2["access"]
    ];
 
     //GRAFICO 3
@@ -45,8 +43,7 @@
      'type' => $grafico3["type"],
      'squadre' => $team,
      'andamentoSquadre' => $andamentoVendite,
-     'access' => $grafico3["access"],
-     "accesso" => 100
+     'access' => $grafico3["access"]
    ];
 
    //oggetto che contiene tutti grafici
@@ -58,19 +55,34 @@
 
    //filtro dei grafici a seconda del valore di access
    $valoreInseritoUtente = $_GET["access"];
-   $livelloAccesso = 0;
+   $livelloaccesso = 0;
    $oggettoFinale = [];
-      foreach ($oggettoDaCuiPrendereIDati as $grafici) {
-          if ($valoreInseritoUtente === $grafici["access"]){
-            $livelloAccesso = $grafici["accesso"];
-          }
-   }
-       foreach ($oggettoDaCuiPrendereIDati as $grafici) {
-           if ($livelloAccesso >= $grafici["accesso"]){
-             $oggettoFinale[] = $grafici;
-           }
+
+   //assegno a ciascun grafico un livello d'accesso basato sulla strinca di access
+   foreach ($oggettoDaCuiPrendereIDati as &$grafici) {
+     if ($grafici["access"] === "guest"){
+       $grafici["livello"] = 1;
+     }
+     if ($grafici["access"] === "employee"){
+       $grafici["livello"] = 10;
+     }
+     if ($grafici["access"] === "clevel"){
+       $grafici["livello"] = 100;
+     }
+  }
+
+    //in base all'input utente, mi salvo l'intero che indica il livello d'accesso
+  foreach ($oggettoDaCuiPrendereIDati as $grafico) {
+    if ($valoreInseritoUtente === $grafico["access"]){
+      $livelloaccesso = $grafico["livello"];
     }
-   // var_dump($oggettoFinale);
+  }
+   //popolo un oggetto con solo i grafici che hanno un livello d'accesso inferiore o uguale a quello dell'utente corrente
+   foreach ($oggettoDaCuiPrendereIDati as $grafico) {
+     if ($livelloaccesso >= $grafico["livello"]){
+       $oggettoFinale[] = $grafico;
+     }
+  }
 
    echo json_encode($oggettoFinale);
   ?>
