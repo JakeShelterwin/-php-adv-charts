@@ -53,8 +53,8 @@
      'grafico3' => $oggettoGrafico3
    ];
 
-   //filtro dei grafici a seconda del valore di access
-   $valoreInseritoUtente = $_GET["access"];
+   //filtro dei grafici a seconda del valore di access, se il valore non è inserito do per scontato che l'utente sia guest
+   $valoreInseritoUtente = $_GET["access"] ?? "guest";
    $livelloaccesso = 0;
    $oggettoFinale = [];
 

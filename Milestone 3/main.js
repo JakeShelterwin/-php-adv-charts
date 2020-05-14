@@ -1,22 +1,28 @@
 
 function init(){
-  //richiamo le funzioni corrispondenti all'input utente, i dati vengono trasmessi comunque solo
-  //per il livello dell'utente, in questo modo mi evito errori in console.
+  //richiamo le funzioni corrispondenti all'input utente, in questo modo mi evito errori in console.
+  //i dati vengono trasmessi da php comunque solo per il livello dell'utente.
   //a seconda del livello nascondo o mostro in html i grafici solo per le funzioni che hanno dati
-  if (window.location.search==="?access=guest"){
+
+  //se non viene inserito alcun valore, l'utente è guest, quindi richiamo la prima funzione e nascondo in html i grafici
+  // di livello superiore.
     faiGraficoLinea();
     $(".grafico2").hide();
     $(".grafico3").hide();
-  }
+
+  //se il livello è employee svelo il grafico corrispondente nascosto per l'utente guest
   if (window.location.search==="?access=employee"){
     faiGraficoLinea();
     faiGraficoTorta();
-    $(".grafico3").hide();
+    $(".grafico2").show();
   }
+  //se il livello è clevel mostro tutti i grafici
   if (window.location.search==="?access=clevel"){
     faiGraficoLinea();
     faiGraficoTorta();
     faiGraficoTripliceLinea();
+    $(".grafico2").show();
+    $(".grafico3").show();
   }
   // faiGraficoLinea();
   // faiGraficoTorta();
@@ -31,7 +37,7 @@ function faiGraficoLinea(){
   method: "GET",
   success: function(data,stato) {
     console.log(data);
-  var ctx = $("#guest");
+  var ctx = $("#fatturato");
   // cambio il colore dei caratteri della canvas
   Chart.defaults.global.defaultFontColor = 'rgb(221, 221, 221, 0.8)';
   var myChart = new Chart(ctx, {
@@ -94,7 +100,7 @@ function faiGraficoTorta(){
   url: "apiNuova.php"+window.location.search,
   method: "GET",
   success: function(data,stato) {
-  var ctx = $("#employee");
+  var ctx = $("#fatturato_by_agent");
   // cambio il colore dei caratteri della canvas
   Chart.defaults.global.defaultFontColor = 'rgb(221, 221, 221, 0.8)';
   var myChart = new Chart(ctx, {
@@ -141,7 +147,7 @@ function faiGraficoTripliceLinea(){
   url: "apiNuova.php"+window.location.search,
   method: "GET",
   success: function(data,stato) {
-  var ctx = $("#clevel");
+  var ctx = $("#team_efficiency");
   // cambio il colore dei caratteri della canvas
   Chart.defaults.global.defaultFontColor = 'rgb(221, 221, 221, 0.8)';
   var myChart = new Chart(ctx, {

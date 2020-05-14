@@ -12,13 +12,13 @@
         <div class="container">
             <div class="grafici">
               <div class="grafico1">
-                <canvas id="guest"></canvas>
+                <canvas id="fatturato"></canvas>
               </div>
               <div class="grafico2">
-                <canvas id="employee"></canvas>
+                <canvas id="fatturato_by_agent"></canvas>
               </div>
               <div class="grafico3">
-                <canvas id="clevel"></canvas>
+                <canvas id="team_efficiency"></canvas>
               </div>
             </div>
         </div>
