@@ -12,13 +12,11 @@ function init(){
 
   //se il livello è employee svelo il grafico corrispondente nascosto per l'utente guest
   if (window.location.search==="?access=employee"){
-    faiGraficoLinea();
     faiGraficoTorta();
     $(".grafico2").show();
   }
   //se il livello è clevel mostro tutti i grafici
   if (window.location.search==="?access=clevel"){
-    faiGraficoLinea();
     faiGraficoTorta();
     faiGraficoTripliceLinea();
     $(".grafico2").show();
